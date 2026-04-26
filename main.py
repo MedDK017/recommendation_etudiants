@@ -12,7 +12,7 @@ with open("model.pkl", "rb") as f:
 df = pd.read_csv("df_final.csv")
 
 def recommend_for_user(user_id, df, model, top_n=5):
-    items = df['item_id'].unique()
+    items = df['item'].unique() [:10]
     predictions = []
 
     for item in items:
@@ -28,8 +28,8 @@ def home():
 
 @app.get("/recommend")
 def recommend(user_id: int):
-    recs = recommend_for_user(user_id, df, model)
-    return {
-        "user_id": user_id,
-        "recommendations": recs
-    }
+        recs = recommend_for_user(user_id, df, model)
+        return {
+            "user_id": user_id,
+            "recommendations": recs
+        }
